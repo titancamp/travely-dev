@@ -11,7 +11,7 @@ trigger:
     - src/TourManager
 
 pool:
-  vmImage: ubuntu-latest
+  name: hetzner
 
 steps:
 - task: Docker@2
