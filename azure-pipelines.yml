@@ -11,7 +11,7 @@ trigger:
     - src/ServiceManager
 
 pool:
-  vmImage: ubuntu-latest
+  name: Azure Pipelines
 
 steps:
 - task: Docker@2
