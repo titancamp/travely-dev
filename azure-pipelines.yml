@@ -16,7 +16,7 @@ pool:
 steps:
 - task: Docker@2
   inputs:
-    containerRegistry: 'DockerHub'
+    containerRegistry: 'registry.travely.am'
     repository: 'titancamp/servicemanager'
     command: 'buildAndPush'
     Dockerfile: 'src/ServiceManager/Travely.ServiceManager.Service/Dockerfile'
