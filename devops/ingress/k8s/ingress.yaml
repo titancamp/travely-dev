@@ -1,0 +1,50 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dev-travely-am
+  namespace: travely-dev
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - host: dev.travely.am
+    http:
+      paths:
+      - path: /app(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: tourmanager-api
+            port:
+              number: 80
+  - host: dev.travely.am
+    http:
+      paths:
+      - path: /auth(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: identity-api
+            port:
+              number: 80
+  - host: dev.travely.am
+    http:
+      paths:
+      - path: /files(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: fileservice
+            port:
+              number: 80
+  - host: dev.travely.am
+    http:
+      paths:
+      - path: /notification(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: schedulermanager-api
+            port:
+              number: 80

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tourmanager-api
+  namespace: travely-dev
+spec:
+  selector:
+    matchLabels:
+      app: tourmanager-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tourmanager-api
+    spec:
+      containers:
+      - name: api
+        image: localhost:32000/travely/tourmanager-api
+        env:
+        - name: ConnectionStrings__TourDbContext
+          value: Server=mssql;Database=Tour;User=sa;Password=I7yxNP8STsnd+H3yfWvAIg==;
+        - name: GrpcServiceSettings__ActivityServiceUrl
+          value: http://servicemanager
+        - name: GrpcServiceSettings__PropertyServiceUrl
+          value: http://propertymanager-api
+        - name: GrpcServiceSettings__ClientServiceUrl
+          value: http://clientmanager
+        - name: GrpcServiceSettings__SchedulerServiceUrl
+          value: http://schedulermanager-api
+        - name: TravelyIdentityConfig__Authority
+          value: http://identity-api
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Production
+        ports:
+        - containerPort: 80

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fileservice
+  namespace: travely-dev
+spec:
+  selector:
+    matchLabels:
+      app: fileservice
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: fileservice
+    spec:
+      containers:
+      - name: fileservice
+        image: localhost:32000/travely/fileservice
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Production
+        ports:
+        - containerPort: 80
