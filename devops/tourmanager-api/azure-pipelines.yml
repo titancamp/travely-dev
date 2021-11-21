@@ -1,5 +1,11 @@
 trigger:
-- dev
+  branches:
+    include:
+    - dev
+  paths:
+    include:
+    - src/TourManager
+    
 
 variables:
   buildConfiguration: 'Release'
