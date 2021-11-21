@@ -16,7 +16,7 @@ stages:
       - task: Docker@2
         inputs:
           command: buildAndPush
-          containerRegistry: travely.registry.am
+          containerRegistry: registry.travely.am
           repository: travely/tourmanager-api
           Dockerfile: $(Build.SourcesDirectory)/src/TourManager/TourManager.Api/Dockerfile
           tags: |
