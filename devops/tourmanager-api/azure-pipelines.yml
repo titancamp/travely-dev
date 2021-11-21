@@ -1,0 +1,24 @@
+trigger:
+- dev
+
+variables:
+  buildConfiguration: 'Release'
+
+stages:
+  - stage: Build
+    pool:
+      vmImage: ubuntu-latest
+    displayName: Build and push the image
+    jobs:
+    - job: build_image
+      displayName: Build image
+      steps:
+      - task: Docker@2
+        inputs:
+          command: buildAndPush
+          containerRegistry: travely.registry.am
+          repository: travely/tourmanager-api
+          Dockerfile: $(Build.SourcesDirectory)/src/TourManager/TourManager.Api/Dockerfile
+          tags: |
+            latest
+            $(Build.BuildId)
