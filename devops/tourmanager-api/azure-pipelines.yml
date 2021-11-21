@@ -33,7 +33,8 @@ stages:
     pool:
       vmImage: ubuntu-latest
     jobs:
-    - deployment: Deploy app
+    - deployment: Deploy
+      displayName: Deploy app
       environment: dev.dev-travely-am
       strategy:
         runOnce:
