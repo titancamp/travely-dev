@@ -19,6 +19,7 @@ stages:
           containerRegistry: registry.travely.am
           repository: travely/tourmanager-api
           Dockerfile: $(Build.SourcesDirectory)/src/TourManager/TourManager.Api/Dockerfile
+          buildContext: $(Build.SourcesDirectory)
           tags: |
             latest
             $(Build.BuildId)
