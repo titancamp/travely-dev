@@ -44,6 +44,7 @@ stages:
             - task: KubernetesManifest@0
               inputs:
                 action: 'deploy'
+                namespace: dev-travely-am
                 #kubernetesServiceConnection: 'dev-dev-travely-am-1637185039689'
                 manifests: 'devops/tourmanager-api/k8s/*.yaml'
                 #imagePullSecrets: 'regcred'
