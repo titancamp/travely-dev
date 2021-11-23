@@ -1,5 +1,11 @@
 trigger:
-- dev
+  branches:
+    include:
+    - dev
+  paths:
+    include:
+    - src/TourManager
+    
 
 variables:
   buildConfiguration: 'Release'
@@ -23,3 +29,22 @@ stages:
           tags: |
             latest
             $(Build.BuildId)
+  - stage: Deploy
+    pool:
+      vmImage: ubuntu-latest
+    jobs:
+    - deployment: Deploy
+      displayName: Deploy app
+      environment: dev.dev-travely-am
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - checkout: self
+            - task: KubernetesManifest@0
+              inputs:
+                action: 'deploy'
+                # namespace: dev-travely-am
+                #kubernetesServiceConnection: 'dev-dev-travely-am-1637185039689'
+                manifests: 'devops/tourmanager-api/k8s/*.yaml'
+                #imagePullSecrets: 'regcred'
