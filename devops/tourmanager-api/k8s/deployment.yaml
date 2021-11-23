@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tourmanager-api
-  namespace: travely-dev
 spec:
   selector:
     matchLabels:
@@ -15,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: localhost:32000/travely/tourmanager-api
+        image: travely/tourmanager-api
         env:
         - name: ConnectionStrings__TourDbContext
           value: Server=mssql;Database=Tour;User=sa;Password=I7yxNP8STsnd+H3yfWvAIg==;
