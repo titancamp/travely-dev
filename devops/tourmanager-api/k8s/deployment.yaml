@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: travely/tourmanager-api
+        image: registry.travely.am/travely/tourmanager-api
         env:
         - name: ConnectionStrings__TourDbContext
           value: Server=mssql;Database=Tour;User=sa;Password=I7yxNP8STsnd+H3yfWvAIg==;
