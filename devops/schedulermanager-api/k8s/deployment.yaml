@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: schedulermanager-api
+  namespace: travely-dev
+spec:
+  selector:
+    matchLabels:
+      app: schedulermanager-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: schedulermanager-api
+    spec:
+      containers:
+      - name: api
+        image: localhost:32000/travely/schedulermanager-api
+        env:
+        - name: SeriLog__ConnectionString
+          value: Server=mssql;Database=SchedulerDb;User=sa;Password=I7yxNP8STsnd+H3yfWvAIg==;
+        - name: RepositoryOptions__ConnectionString
+          value: Server=mssql;Database=SchedulerDb;User=sa;Password=I7yxNP8STsnd+H3yfWvAIg==;
+        - name: JobOptions__ConnectionString
+          value: Server=mssql;Database=SchedulerDb;User=sa;Password=I7yxNP8STsnd+H3yfWvAIg==;
+        - name: NotifierOptions__RedisConnectionString
+          value: redis:6379
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Production
+        ports:
+        - containerPort: 80

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: servicemanager
+  namespace: travely-dev
+spec:
+  selector:
+    matchLabels:
+      app: servicemanager
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: servicemanager
+    spec:
+      containers:
+      - name: api
+        image: localhost:32000/travely/servicemanager
+        env:
+        - name: ConnectionStrings__DefaultConnection
+          value: Server=mssql;Database=ServiceManagerDb;User=sa;Password=I7yxNP8STsnd+H3yfWvAIg==;
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Production
+        ports:
+        - containerPort: 80

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: servicemanager
+  namespace: travely-dev
+spec:
+  selector:
+    app: servicemanager
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

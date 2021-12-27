@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+  namespace: travely-dev
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  serviceName: redis
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:6
+        ports:
+        - containerPort: 6379
+        env:
+        - name: MASTER
+          value: "true"
+        volumeMounts:
+        - name: redisdata
+          mountPath: /redis-master-data
+  volumeClaimTemplates:
+  - metadata:
+      name: redisdata
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 2Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: travely-dev
+  labels:
+    app: redis
+spec:
+  ports:
+  - name: redis
+    port: 1433
+  clusterIP: None
+  selector:
+    app: redis
